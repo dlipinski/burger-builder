@@ -19,7 +19,15 @@ class BurgerBuilder extends Component {
 			meat: 0,
 		},
 		totalPrice: 4,
+		purchasable: false,
 	};
+
+	updatePurchaseState(ingredients) {
+		const sum = Object.values(ingredients).reduce((sum, el) => {
+			return sum + el;
+		}, 0);
+		this.setState({ purchasable: sum > 0 });
+	}
 
 	addIngredientHangler = (type) => {
 		const oldCount = this.state.ingredients[type];
@@ -31,14 +39,15 @@ class BurgerBuilder extends Component {
 		const priceAddition = INGREDIENT_PRICES[type];
 		const oldPrice = this.state.totalPrice;
 		const updatedPrice = oldPrice + priceAddition;
-		this.setState({ totalPrice: updatedPrice, ingredients: updatedIngredients });
+    this.setState({ totalPrice: updatedPrice, ingredients: updatedIngredients });
+    this.updatePurchaseState(updatedIngredients);
 	};
 
 	removeIngredientHandler = (type) => {
-    const oldCount = this.state.ingredients[type];
-    if (oldCount <= 0) {
-      return;
-    }
+		const oldCount = this.state.ingredients[type];
+		if (oldCount <= 0) {
+			return;
+		}
 		const updatedCount = oldCount - 1;
 		const updatedIngredients = {
 			...this.state.ingredients,
@@ -47,20 +56,27 @@ class BurgerBuilder extends Component {
 		const priceDeduction = INGREDIENT_PRICES[type];
 		const oldPrice = this.state.totalPrice;
 		const updatedPrice = oldPrice - priceDeduction;
-		this.setState({ totalPrice: updatedPrice, ingredients: updatedIngredients });
+    this.setState({ totalPrice: updatedPrice, ingredients: updatedIngredients });
+    this.updatePurchaseState(updatedIngredients);
 	};
 
 	render() {
-    const disabledInfo = {
-      ...this.state.ingredients
-    };
-    for (let key in disabledInfo) {
-      disabledInfo[key] = disabledInfo[key] <= 0;
-    }
+		const disabledInfo = {
+			...this.state.ingredients,
+		};
+		for (let key in disabledInfo) {
+			disabledInfo[key] = disabledInfo[key] <= 0;
+		}
 		return (
 			<React.Fragment>
 				<Burger ingredients={this.state.ingredients} />
-				<BuildControls ingredientAdded={this.addIngredientHangler} ingredientRemoved={this.removeIngredientHandler} disabled={disabledInfo} price={this.state.totalPrice}/>
+				<BuildControls
+					ingredientAdded={this.addIngredientHangler}
+					ingredientRemoved={this.removeIngredientHandler}
+					disabled={disabledInfo}
+					price={this.state.totalPrice}
+					purchasable={this.state.purchasable}
+				/>
 			</React.Fragment>
 		);
 	}
