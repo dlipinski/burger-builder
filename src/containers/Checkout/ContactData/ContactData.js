@@ -187,14 +187,14 @@ const mapStateToProps = (state) => {
 	return {
 		ings: state.ingredients,
 		price: state.totalPrice,
-		laoding: state.loading
+		laoding: state.loading,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData));
-	}
+		onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData)),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
