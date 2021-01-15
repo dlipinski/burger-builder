@@ -4,8 +4,9 @@ import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = (props) => {
-	let auth = <NavigationItem link='/auth'>Authenticate</NavigationItem>;
-	if (props.isAuthenticated) {
+  let auth = <NavigationItem link='/auth'>Authenticate</NavigationItem>;
+  
+	if (props.isAuth) {
 		auth = <NavigationItem link='/logout'>Logout</NavigationItem>;
 	}
 
