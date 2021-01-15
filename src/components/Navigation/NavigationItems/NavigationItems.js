@@ -4,10 +4,15 @@ import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = (props) => {
-  let auth = <NavigationItem link='/auth'>Authenticate</NavigationItem>;
-  
+	let authItems = <NavigationItem link='/auth'>Authenticate</NavigationItem>;
+
 	if (props.isAuth) {
-		auth = <NavigationItem link='/logout'>Logout</NavigationItem>;
+		authItems = (
+			<React.Fragment>
+				<NavigationItem link='/logout'>Logout</NavigationItem>
+				<NavigationItem link='/orders'>Orders</NavigationItem>
+			</React.Fragment>
+		);
 	}
 
 	return (
@@ -15,8 +20,7 @@ const navigationItems = (props) => {
 			<NavigationItem link='/' exact>
 				Burger Builder
 			</NavigationItem>
-			<NavigationItem link='/orders'>Orders</NavigationItem>
-			{auth}
+			{authItems}
 		</ul>
 	);
 };
