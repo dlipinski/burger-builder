@@ -107,7 +107,6 @@ class Auth extends Component {
 		));
 
 		if (this.props.loading) {
-			console.log(this.props.loading);
 			form = <Spinner />;
 		}
 
