@@ -6,11 +6,11 @@ import NavigationItem from './NavigationItem/NavigationItem';
 const navigationItems = (props) => {
 	let authItems = <NavigationItem link='/auth'>Authenticate</NavigationItem>;
 
-	if (props.isAuth) {
+	if (props.isAuthenticated) {
 		authItems = (
 			<React.Fragment>
-				<NavigationItem link='/logout'>Logout</NavigationItem>
 				<NavigationItem link='/orders'>Orders</NavigationItem>
+				<NavigationItem link='/logout'>Logout</NavigationItem>
 			</React.Fragment>
 		);
 	}

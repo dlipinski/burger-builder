@@ -37,7 +37,7 @@ const authFail = (state, action) => {
 const authLogout = (state, action) => {
 	return {
 		...state,
-		idToken: null,
+		token: null,
 		userId: null,
 	};
 };

@@ -129,12 +129,12 @@ class Auth extends Component {
 		let errorMessage = null;
 
 		if (this.props.error) {
-			errorMessage = <p>{this.props.error.message}</p>;
+			errorMessage = <p style={{color: 'red', fontWeight: 'bold', padding: '1rem', border: '2px solid red'}}>{this.props.error.message}</p>;
 		}
 
 		let authRedirect = null;
 		if (this.props.isAuthenticated) {
-			authRedirect = <Redirect to={this.props.authRedirectpath} />;
+			authRedirect = <Redirect to={this.props.authRedirectPath} />;
 		}
 
 		return (
